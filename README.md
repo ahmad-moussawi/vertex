@@ -1,8 +1,14 @@
-# Vertex
-Powerful JSX View Engine 😎
+# Vertex 👓
+Powerful JSX View Engine
+
+**How it works:**
+Vertex compiles and caches your JSX views to Hyperscript so they will get easily rendered to HTML using [vhtml](https://github.com/developit/vhtml).
+
+Vertex will compile your views only when needed, giving you the performance boost.
+
+You can use the **include** directive to include partials views
 
 # Getting Started
-Vertex let you write your views using the JSX syntax, it will compile them to Hyperscript, and then they will get rendered by [vhtml](https://github.com/developit/vhtml)
 
 ## Installation
 ```shell
@@ -37,6 +43,7 @@ module.exports = (props) => <div class="header">Header</div>
 module.exports = (props) => <div class="footer">Footer</div>
 ```
 
+ - `index.js`
 
 ```js
 const Vertex = require('Vertex');
