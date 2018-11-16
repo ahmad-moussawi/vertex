@@ -6,8 +6,14 @@
     "name": "Ahmad Moussawi",
     "url": "https://twitter.com/ahmadmuzavi"
   },
-  "keywords": ["View Engine", "JSX", "Render", "HTML", "VHTML"],
-  "version": "1.0.0",
+  "keywords": [
+    "View Engine",
+    "JSX",
+    "Render",
+    "HTML",
+    "VHTML"
+  ],
+  "version": "1.0.1",
   "main": "lib/index.js",
   "types": "lib/index.js",
   "license": "MIT",
