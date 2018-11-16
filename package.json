@@ -1,0 +1,30 @@
+{
+  "name": "vertex",
+  "description": "A powerful JSX View Engine",
+  "author": {
+    "email": "aymoussawi@gmail.com",
+    "name": "Ahmad Moussawi",
+    "url": "https://twitter.com/ahmadmuzavi"
+  },
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "types": "lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run build:live",
+    "build": "tsc -p .",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
+  },
+  "dependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-react": "^7.0.0"
+  },
+  "peerDependencies": {
+    "vhtml": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.8",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.6"
+  }
+}
