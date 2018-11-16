@@ -20,15 +20,23 @@ export class Vertex {
     }
 
     /**
-     * Compile a view
+     * Try to compile a view if it's expired
      * @param view
      */
-    async compile(view: string): Promise<void> {
+    async compileIfNeeded(view: string): Promise<void> {
+
+        view = this.normalizeName(view);
 
         if (!(await this.expired(view))) {
-            console.log(`${view}: skip compilation`)
             return;
         }
+
+        await this.compile(view);
+
+    }
+
+    async compile(view: string): Promise<void> {
+        view = this.normalizeName(view);
 
         let code = await this._transform(this.resolvePath(view));
 
@@ -46,7 +54,9 @@ export class Vertex {
      */
     async render(view: string, data?: any) {
 
-        await this.compile(view);
+        view = this.normalizeName(view);
+
+        await this.compileIfNeeded(view);
 
         const path = this.resolveCompiledPath(view);
 
@@ -95,7 +105,7 @@ export class Vertex {
      * @param view
      */
     compiledName(view: string) {
-        const name = view.substring(0, view.lastIndexOf('.'))
+        const name = view.substring(0, view.lastIndexOf('.'));
         return md5(name) + '.js';
     }
 
@@ -107,7 +117,7 @@ export class Vertex {
         return code.split(/\n/)
             .filter(l => includeRe.test(l))
             .map(l => l.match(includeRe))
-            .map(matches => matches[3].slice(1, -1));
+            .map(matches => this.normalizeName(matches[3].slice(1, -1)));
     }
 
     /**
@@ -116,7 +126,7 @@ export class Vertex {
      */
     async compileIncludes(code: string) {
         const files = this.findIncludeDirectives(code);
-        await Promise.all(files.map(async file => this.compile(file)));
+        await Promise.all(files.map(async file => this.compileIfNeeded(file)));
     }
 
     /**
@@ -127,8 +137,9 @@ export class Vertex {
 
         const replacer = (match: string, p1: string, p2: string, p3: string) => {
             // remove the surrounding quotation
-            p3 = p3.slice(1, -1);
-            const compiled = this.compiledName(p3);
+            const included = this.normalizeName(p3.slice(1, -1));
+            const compiled = this.compiledName(included);
+            console.log(`${p3} => ${included} => ${compiled}`)
             return `const ${p2} = require('./${compiled}');`;
         };
 
@@ -157,6 +168,10 @@ export class Vertex {
      */
     async compiledExists(view: string) {
         return await this._exists(this.resolveCompiledPath(view));
+    }
+
+    private normalizeName(view: string) {
+        return /\.jsx$/.test(view) ? view : view + '.jsx';
     }
 
     private async _exists(file: string): Promise<boolean> {

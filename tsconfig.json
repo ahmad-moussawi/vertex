@@ -33,6 +33,8 @@
     "resolveJsonModule": true /* Include modules imported with '.json' extension */
   },
   "exclude": [
-    "src/program"
+    "lib",
+    "src/program",
+    "node_modules"
   ],
 }

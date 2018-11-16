@@ -21,8 +21,8 @@ Create the needed views
 - `views/index.jsx`
 
 ```jsx
-const Header = include('header.jsx');
-const Footer = include('footer.jsx');
+const Header = include('header');
+const Footer = include('footer');
 
 module.exports = (props) => <div>
     <Header/>
@@ -53,7 +53,7 @@ const cacheLocation = __dirname + '/cache';
 
 const v = new Vertex(viewLocation, cacheLocation);
 
-const html = v.render('index.jsx', {message: 'Hello Vertex'});
+const html = v.render('index', {message: 'Hello Vertex'});
 
 ```
 
