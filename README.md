@@ -18,7 +18,7 @@ npm install --save vertex vhtml
 ## Usage
 Create the needed views
 
-- `views/index.jsx`
+- View: `views/index.jsx`
 
 ```jsx
 const Header = include('header');
@@ -31,19 +31,19 @@ module.exports = (props) => <div>
 </div>
 ```
 
-- `views/header.jsx`
+- View: `views/header.jsx`
 
 ```jsx
 module.exports = (props) => <div class="header">Header</div>
 ```
 
-- `views/footer.jsx`
+- View: `views/footer.jsx`
 
 ```jsx
 module.exports = (props) => <div class="footer">Footer</div>
 ```
 
- - `index.js`
+ - File: `index.js`
 
 ```js
 const Vertex = require('Vertex');
