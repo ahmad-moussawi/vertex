@@ -4,18 +4,37 @@ Powerful JSX View Engine
 **How it works:**
 Vertex compiles and caches your JSX views to Hyperscript so they will get easily rendered to HTML using [vhtml](https://github.com/developit/vhtml).
 
-Vertex will compile your views only when needed, giving you the performance boost.
+Views will get compiled only when needed, giving you the performance boost.
 
-You can use the **include** directive to include partials views
+To include partials in your view use the **include** directive.
 
 # Getting Started
 
 ## Installation
 ```shell
-npm install --save vertex vhtml
+npm install --save @vivida/vertex vhtml
 ```
 
-## Usage
+## Getting Started
+
+### Basic Setup
+
+```js
+const Vertex = require('@vivida/vertex').Vertex;
+
+const engine = new Vertex();
+
+engine.render('home', data).then(html => console.log(html)); // will render `views/home.jsx`
+```
+
+You can set the **views** and **cache** directories, by setting the parameters in the constructor
+
+```js
+const engine = new Vertex('/my/views/path', '/my/cache/path');
+```
+
+### Full Example
+
 Create the needed views
 
 - View: `views/index.jsx`
@@ -46,14 +65,17 @@ module.exports = (props) => <div class="footer">Footer</div>
  - File: `index.js`
 
 ```js
-const Vertex = require('Vertex');
+const Vertex = require('@vivida/vertex').Vertex;
 
+// the views directory
 const viewLocation = __dirname + '/views';
+
+// the cache directory
 const cacheLocation = __dirname + '/cache';
 
 const v = new Vertex(viewLocation, cacheLocation);
 
-const html = v.render('index', {message: 'Hello Vertex'});
+v.render('index', {message: 'Hello Vertex'}).then(html => console.log(html));
 
 ```
 
@@ -65,3 +87,33 @@ output:
     <div class="footer">Footer</div>
 </div>
 ```
+
+## Using async/await instead
+
+```js
+import { Vertex } from '@vivida/vertex';
+
+// the views directory
+const viewLocation = __dirname + '/views';
+
+// the cache directory
+const cacheLocation = __dirname + '/cache';
+
+const v = new Vertex(viewLocation, cacheLocation);
+
+async function main() {
+
+    const html = await v.render('index', {message: 'Hello Vertex'});
+
+    console.log(html);
+
+}
+
+main();
+```
+
+
+
+> **Note:** The `cacheLocation` directory should be writable by user process
+
+Follow https://twitter.com/ahmadmuzavi for any updates about Vertex.

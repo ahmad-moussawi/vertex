@@ -14,7 +14,7 @@ export class Vertex {
     private viewLocation: string;
     private cacheLocation: string;
 
-    constructor(viewLocation: string, cacheLocation: string) {
+    constructor(viewLocation: string = __dirname + '/views', cacheLocation: string = __dirname + '/cache') {
         this.viewLocation = viewLocation;
         this.cacheLocation = cacheLocation;
     }

@@ -1,7 +1,7 @@
 export declare class Vertex {
     private viewLocation;
     private cacheLocation;
-    constructor(viewLocation: string, cacheLocation: string);
+    constructor(viewLocation?: string, cacheLocation?: string);
     /**
      * Try to compile a view if it's expired
      * @param view
