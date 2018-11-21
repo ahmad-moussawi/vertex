@@ -11,12 +11,11 @@ const includeRe = /(?:(const|var|let)\s+)*(\w+)\s*=\s*include\((.+)\);*/;
 
 export class Vertex {
 
-    private viewLocation: string;
-    private cacheLocation: string;
-
-    constructor(viewLocation: string = __dirname + '/views', cacheLocation: string = __dirname + '/cache') {
-        this.viewLocation = viewLocation;
-        this.cacheLocation = cacheLocation;
+    constructor(
+        private viewLocation = __dirname + '/views',
+        private cacheLocation = __dirname + '/cache',
+        private alwaysRecompile = false
+    ) {
     }
 
     /**
@@ -71,6 +70,8 @@ export class Vertex {
      * @param view
      */
     async expired(view: string): Promise<boolean> {
+
+        if (this.alwaysRecompile) return Promise.resolve(true);
 
         // no compiled version so create one
         if (!(await this.compiledExists(view))) {

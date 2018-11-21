@@ -112,8 +112,13 @@ async function main() {
 main();
 ```
 
-
-
 > **Note:** The `cacheLocation` directory should be writable by user process
+
+## Constructor Arguments
+
+- **viewLocation** `string` defaults to `./views`: the views root directory
+- **cacheLocation** `string` defaults to `./cache`: the cache directory, it should be writable by the engine process
+- **alwaysRecompile** `bool` defaults to `false`: useful for development, always recompile the views
+
 
 Follow https://twitter.com/ahmadmuzavi for any updates about Vertex.
