@@ -13,7 +13,7 @@
     "HTML",
     "VHTML"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "lib/index.js",
   "types": "lib/index.js",
   "license": "MIT",
